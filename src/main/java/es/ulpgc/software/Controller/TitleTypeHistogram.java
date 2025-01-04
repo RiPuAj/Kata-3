@@ -1,12 +1,13 @@
 package es.ulpgc.software.Controller;
 
+import es.ulpgc.software.Model.Histogram;
 import es.ulpgc.software.Model.Title;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TitleTypeHistogram {
+public class TitleTypeHistogram implements Histogram {
 
     private final Map<Title.TitleTypes, Long> histogram;
 
@@ -34,10 +35,10 @@ public class TitleTypeHistogram {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Title.TitleTypes titleType : Title.TitleTypes.values()) {
-            Long count = histogram.get(titleType) % 100000;
+            long count = histogram.get(titleType) % 100000;
             sb.append(titleType)
                     .append(": ")
-                    .append("|".repeat(count.intValue()))
+                    .append("|".repeat((int) count))
                     .append("\n");
         }
         return sb.toString();
